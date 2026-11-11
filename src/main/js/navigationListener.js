@@ -10,6 +10,7 @@ const gameScriptMap = {
   '/games/zip': 'zip.js',
   '/games/tango': 'tango.js',
   '/games/patches': 'patches.js',
+  '/games/wend': 'wend.js',
 };
 
 polyfilledBrowser.webNavigation.onHistoryStateUpdated

@@ -13,6 +13,7 @@ A Firefox- and Chrome-compatible browser extension for solving daily LinkedIn Ga
 - [Zip](https://www.linkedin.com/games/zip/)
 - [Tango](https://www.linkedin.com/games/tango/)
 - [Patches](https://www.linkedin.com/games/patches/)
+- [Wend](https://www.linkedin.com/games/wend/) using the bundled local word list
 
 ## Usage
 
