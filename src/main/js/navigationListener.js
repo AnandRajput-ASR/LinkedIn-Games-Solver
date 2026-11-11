@@ -12,6 +12,7 @@ const gameScriptMap = {
   '/games/patches': 'patches.js',
   '/games/wend': 'wend.js',
   '/games/crossclimb': 'crossclimb.js',
+  '/games/pinpoint': 'pinpoint.js',
 };
 
 polyfilledBrowser.webNavigation.onHistoryStateUpdated

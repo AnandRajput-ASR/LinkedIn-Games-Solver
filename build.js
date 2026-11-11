@@ -36,6 +36,7 @@ const sharedOutputFiles = [
   'patches.js',
   'wend.js',
   'crossclimb.js',
+  'pinpoint.js',
   'lexicon.json',
   'DICTIONARY-LICENSES.txt',
   // Background scripts
@@ -51,6 +52,7 @@ const scriptsToBuild = [
   { entry: 'src/main/js/patches/patches.js', out: `${distDir}/patches.js` },
   { entry: 'src/main/js/wend/wend.js', out: `${distDir}/wend.js` },
   { entry: 'src/main/js/crossclimb/crossclimb.js', out: `${distDir}/crossclimb.js` },
+  { entry: 'src/main/js/pinpoint/pinpoint.js', out: `${distDir}/pinpoint.js` },
   // Background script
   {
     entry: 'src/main/js/navigationListener.js',

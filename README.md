@@ -15,11 +15,15 @@ A Firefox- and Chrome-compatible browser extension for solving daily LinkedIn Ga
 - [Patches](https://www.linkedin.com/games/patches/)
 - [Wend](https://www.linkedin.com/games/wend/) using the bundled local word list
 - [Crossclimb](https://www.linkedin.com/games/crossclimb/) using the in-game Reveal row assist, then arranging the revealed words into a one-letter ladder
+- [Pinpoint](https://www.linkedin.com/games/pinpoint/) using readable text clues and up to three local category probes to reveal more clues; image-only clues are not inferred
 
 ## Usage
 
 1. Open a supported game on LinkedIn.
 2. Click the extension icon in your browser toolbar and choose the game-specific solve button.
+3. For Pinpoint, enter the readable clues currently shown in the game before choosing **Find Pinpoint category**. If it needs more information, reveal another clue and try again.
+
+Crossclimb may use LinkedIn's in-game **Reveal** assist before arranging the revealed words. Pinpoint uses readable clue text and limited local category probes; it does not infer image-only clues.
 
 ## Prerequisites
 
