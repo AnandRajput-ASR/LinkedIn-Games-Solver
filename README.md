@@ -23,6 +23,22 @@ A browser extension for Chrome and Firefox that helps solve LinkedIn's daily puz
 
 For Pinpoint, enter the readable clues currently visible in the game before choosing **Find Pinpoint category**. If the solver needs more information, reveal another clue and try again.
 
+## Install from a GitHub release
+
+Download the browser ZIP from the [latest GitHub release](https://github.com/AnandRajput-ASR/LinkedIn-Games-Solver/releases/latest) and extract it.
+
+### Chrome
+
+1. Open `chrome://extensions/` and enable **Developer mode**.
+2. Choose **Load unpacked** and select the extracted folder containing `manifest.json`.
+
+### Firefox
+
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Choose **Load Temporary Add-on** and select `manifest.json` from the extracted folder.
+
+Firefox temporary add-ons are removed when Firefox closes. A permanent Firefox installation requires a signed add-on.
+
 ## Build and test
 
 Requirements: Node.js and npm.
