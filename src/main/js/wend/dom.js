@@ -2,11 +2,17 @@ import { loadLocalLexicon } from '../dictionary.js';
 import { solveWendGrid } from '../localDictionarySolver.js';
 import { getGridDiv } from '../util.js';
 
-const WORD_LENGTHS = [3, 4, 5, 7];
-
 export async function autoSolve() {
   const gridDiv = getWendGridDiv();
   const columns = getGridColumns(gridDiv);
+  const wordRows = Array.from(gridDiv.ownerDocument.querySelectorAll(
+    '[data-testid^="wend-word-list-row-"]'
+  ));
+  const wordLengths = wordRows.map(row =>
+    row.querySelectorAll('[data-testid^="wend-word-list-slot-"]').length);
+  if (wordLengths.length === 0 || wordLengths.some(length => length === 0)) {
+    throw new Error('Wend: could not read the required word lengths');
+  }
   const cellEls = new Map();
   const tiles = [];
 
@@ -17,16 +23,17 @@ export async function autoSolve() {
     cellEls.set(idx, cell);
     tiles.push({ idx, letter });
   }
-  if (tiles.length !== WORD_LENGTHS.reduce((sum, length) => sum + length, 0)) {
-    throw new Error(`Wend: expected 19 letter tiles, found ${tiles.length}`);
-  }
   if (gridDiv.querySelector('[data-cell-selecting="true"]')
-      || gridDiv.querySelector('[data-testid^="wend-word-list-row-"][data-locked="true"]')) {
+      || wordRows.some(row => row.getAttribute('data-locked') === 'true')) {
     throw new Error('Wend: reset the board before solving a partial game');
+  }
+  const expectedTiles = wordLengths.reduce((sum, length) => sum + length, 0);
+  if (tiles.length !== expectedTiles) {
+    throw new Error(`Wend: expected ${expectedTiles} letter tiles, found ${tiles.length}`);
   }
 
   const lexicon = await loadLocalLexicon();
-  const solution = solveWendGrid(tiles, columns, WORD_LENGTHS, lexicon);
+  const solution = solveWendGrid(tiles, columns, wordLengths, lexicon);
   console.info('Wend local dictionary solution:', solution.map(({word}) => word));
   await enterWords(gridDiv, cellEls, solution, columns);
 }
@@ -35,11 +42,53 @@ function getWendGridDiv() {
   return getGridDiv(doc => doc.querySelector('[data-testid="interactive-grid"]'));
 }
 
-function getGridColumns(gridDiv) {
+export function getGridColumns(gridDiv) {
   const props = ['--igtm7c', '--cols', '--grid-cols'];
-  for (const property of props) {
-    const columns = Number.parseInt(gridDiv.style.getPropertyValue(property), 10);
-    if (Number.isInteger(columns) && columns > 0) return columns;
+  const computed = gridDiv.ownerDocument.defaultView.getComputedStyle(gridDiv);
+  for (const style of [gridDiv.style, computed]) {
+    for (const property of props) {
+      const value = style.getPropertyValue(property).trim();
+      const columns = Number(value);
+      if (/^\d+$/.test(value) && Number.isSafeInteger(columns) && columns > 0) {
+        return columns;
+      }
+    }
+  }
+
+  // Browsers resolve repeat()/fr tracks to pixel sizes in computed grid styles.
+  const tracks = computed.getPropertyValue('grid-template-columns')
+    .replace(/\[[^\]]*\]/g, ' ').trim().split(/\s+/);
+  if (computed.getPropertyValue('display') === 'grid'
+      || computed.getPropertyValue('display') === 'inline-grid') {
+    if (tracks.every(track => /^\d+(?:\.\d+)?px$/.test(track))) {
+      return tracks.length;
+    }
+  }
+
+  const cells = Array.from(gridDiv.querySelectorAll('[data-testid^="cell-"]'))
+    .map(cell => ({
+      idx: Number(cell.getAttribute('data-cell-idx')),
+      rect: cell.getBoundingClientRect()
+    }))
+    .filter(({idx, rect}) => Number.isSafeInteger(idx) && idx >= 0
+      && rect.width > 0 && rect.height > 0);
+  const coordinates = property => cells.map(({rect}) => rect[property])
+    .sort((a, b) => a - b)
+    .filter((value, index, values) => index === 0 || value - values[index - 1] > 1);
+  const lefts = coordinates('left');
+  const tops = coordinates('top');
+  const columns = lefts.length;
+  const positions = cells.map(({idx, rect}) => ({
+    idx,
+    col: lefts.findIndex(left => Math.abs(left - rect.left) <= 1),
+    row: tops.findIndex(top => Math.abs(top - rect.top) <= 1)
+  }));
+  const first = positions[0];
+  // Validate the stride against cell indices; sparse boards are not square.
+  if (positions.length > 1 && positions.every(({idx, row, col}) =>
+    row >= 0 && col >= 0
+      && idx - first.idx === (row - first.row) * columns + col - first.col)) {
+    return columns;
   }
   throw new Error('Wend: could not read the grid column count');
 }
