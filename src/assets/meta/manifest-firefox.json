@@ -32,6 +32,10 @@
     {
       "matches": ["*://*.linkedin.com/games/patches*"],
       "js": ["patches.js"]
+    },
+    {
+      "matches": ["*://*.linkedin.com/games/wend*"],
+      "js": ["wend.js"]
     }
   ],
   "web_accessible_resources": [{

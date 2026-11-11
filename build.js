@@ -34,6 +34,7 @@ const sharedOutputFiles = [
   'zip.js',
   'tango.js',
   'patches.js',
+  'wend.js',
   'lexicon.json',
   'DICTIONARY-LICENSES.txt',
   // Background scripts
@@ -47,6 +48,7 @@ const scriptsToBuild = [
   { entry: 'src/main/js/zip/zip.js', out: `${distDir}/zip.js` },
   { entry: 'src/main/js/tango/tango.js', out: `${distDir}/tango.js` },
   { entry: 'src/main/js/patches/patches.js', out: `${distDir}/patches.js` },
+  { entry: 'src/main/js/wend/wend.js', out: `${distDir}/wend.js` },
   // Background script
   {
     entry: 'src/main/js/navigationListener.js',
