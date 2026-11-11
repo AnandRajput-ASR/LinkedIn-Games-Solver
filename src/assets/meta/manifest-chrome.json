@@ -22,6 +22,10 @@
       "js": ["sudoku.js"]
     },
     {
+      "matches": ["*://*.linkedin.com/games/zip*"],
+      "js": ["zip.js"]
+    },
+    {
       "matches": ["*://*.linkedin.com/games/patches*"],
       "js": ["patches.js"]
     }

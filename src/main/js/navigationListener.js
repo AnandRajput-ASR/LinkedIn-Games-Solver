@@ -7,6 +7,7 @@ const gameScriptMap = {
   '/games/sudoku': 'sudoku.js',
   '/games/mini-sudoku': 'sudoku.js',
   '/games/minisudoku': 'sudoku.js',
+  '/games/zip': 'zip.js',
   '/games/patches': 'patches.js',
 };
 
