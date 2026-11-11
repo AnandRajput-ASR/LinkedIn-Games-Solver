@@ -11,6 +11,7 @@ const gameScriptMap = {
   '/games/tango': 'tango.js',
   '/games/patches': 'patches.js',
   '/games/wend': 'wend.js',
+  '/games/crossclimb': 'crossclimb.js',
 };
 
 polyfilledBrowser.webNavigation.onHistoryStateUpdated

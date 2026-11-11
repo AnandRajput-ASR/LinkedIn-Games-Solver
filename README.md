@@ -14,6 +14,7 @@ A Firefox- and Chrome-compatible browser extension for solving daily LinkedIn Ga
 - [Tango](https://www.linkedin.com/games/tango/)
 - [Patches](https://www.linkedin.com/games/patches/)
 - [Wend](https://www.linkedin.com/games/wend/) using the bundled local word list
+- [Crossclimb](https://www.linkedin.com/games/crossclimb/) using the in-game Reveal row assist, then arranging the revealed words into a one-letter ladder
 
 ## Usage
 
