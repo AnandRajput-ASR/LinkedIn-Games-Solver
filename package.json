@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "babel-jest": "^29.7.0",
+    "chokidar": "^4.0.3",
+    "esbuild": "0.25.2",
+    "jest": "^29.7.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:slow": "jest --testMatch='**/*.slowtest.js'"
+  },
+  "type": "module",
+  "dependencies": {
+    "an-array-of-english-words": "^2.0.0",
+    "wordnet-db": "^3.1.14"
+  }
+}
