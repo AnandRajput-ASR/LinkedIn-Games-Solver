@@ -9,12 +9,15 @@ polyfilledBrowser.tabs.query({ active: true, currentWindow: true })
       const isSudoku = url.includes("linkedin.com/games/sudo")
           || url.includes("linkedin.com/games/mini-sudo")
           || url.includes("linkedin.com/games/minisudoku");
+      const isZip = url.includes("linkedin.com/games/zip");
       const isPatches = url.includes("linkedin.com/games/patches");
 
       if (isQueens) {
         enableButtonExecuteScript(button, 'Solve Queens', tab, 'queens');
       } else if (isSudoku) {
         enableButtonExecuteScript(button, 'Solve Mini-Sudoku', tab, 'sudoku');
+      } else if (isZip) {
+        enableButtonExecuteScript(button, 'Solve Zip', tab, 'zip');
       } else if (isPatches) {
         enableButtonExecuteScript(button, 'Solve Patches', tab, 'patches');
       } else {

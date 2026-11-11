@@ -10,6 +10,7 @@ A Firefox- and Chrome-compatible browser extension for solving daily LinkedIn Ga
 
 - [Queens](https://www.linkedin.com/games/queens/)
 - [Mini-Sudoku](https://www.linkedin.com/games/sudoku/)
+- [Zip](https://www.linkedin.com/games/zip/)
 - [Patches](https://www.linkedin.com/games/patches/)
 
 ## Usage
