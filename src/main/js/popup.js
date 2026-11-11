@@ -13,6 +13,7 @@ polyfilledBrowser.tabs.query({ active: true, currentWindow: true })
       const isTango = url.includes("linkedin.com/games/tango");
       const isPatches = url.includes("linkedin.com/games/patches");
       const isWend = url.includes("linkedin.com/games/wend");
+      const isCrossclimb = url.includes("linkedin.com/games/crossclimb");
 
       if (isQueens) {
         enableButtonExecuteScript(button, 'Solve Queens', tab, 'queens');
@@ -26,6 +27,8 @@ polyfilledBrowser.tabs.query({ active: true, currentWindow: true })
         enableButtonExecuteScript(button, 'Solve Patches', tab, 'patches');
       } else if (isWend) {
         enableButtonExecuteScript(button, 'Solve Wend', tab, 'wend');
+      } else if (isCrossclimb) {
+        enableButtonExecuteScript(button, 'Solve Crossclimb', tab, 'crossclimb');
       } else {
         disableButton(button);
       }
