@@ -9,6 +9,7 @@ https://github.com/user-attachments/assets/8c7d7c48-01db-40f8-aa06-ec2156c84417
 A Firefox- and Chrome-compatible browser extension for solving daily LinkedIn Games puzzles. Currently supported games (links open LinkedIn):
 
 - [Queens](https://www.linkedin.com/games/queens/)
+- [Mini-Sudoku](https://www.linkedin.com/games/sudoku/)
 - [Patches](https://www.linkedin.com/games/patches/)
 
 ## Usage

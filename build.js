@@ -30,6 +30,7 @@ const sharedOutputFiles = [
   'popup.js',
   // Content scripts
   'queens.js',
+  'sudoku.js',
   'patches.js',
   'lexicon.json',
   'DICTIONARY-LICENSES.txt',
@@ -40,6 +41,7 @@ const sharedOutputFiles = [
 const scriptsToBuild = [
   // Content scripts
   { entry: 'src/main/js/queens/queens.js', out: `${distDir}/queens.js` },
+  { entry: 'src/main/js/sudoku/sudoku.js', out: `${distDir}/sudoku.js` },
   { entry: 'src/main/js/patches/patches.js', out: `${distDir}/patches.js` },
   // Background script
   {

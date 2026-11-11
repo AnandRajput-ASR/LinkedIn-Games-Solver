@@ -18,6 +18,10 @@
       "js": ["queens.js"]
     },
     {
+      "matches": ["*://*.linkedin.com/games/*sudo*"],
+      "js": ["sudoku.js"]
+    },
+    {
       "matches": ["*://*.linkedin.com/games/patches*"],
       "js": ["patches.js"]
     }
