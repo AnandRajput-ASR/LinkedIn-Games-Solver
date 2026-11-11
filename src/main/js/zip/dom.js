@@ -1,6 +1,30 @@
 import { anticipateOneMutation, getGridDiv } from '../util.js';
 import { compressSequence, solveZip } from './solver.js';
 
+export function readRenderedWalls(cellDivs, rows, cols) {
+  const downWalls = new Set();
+  const rightWalls = new Set();
+  for (const [idx, cell] of cellDivs.entries()) {
+    if (!cell) continue;
+    const view = cell.ownerDocument.defaultView;
+    for (const child of cell.children) {
+      for (const pseudo of ['::before', '::after']) {
+        const style = view.getComputedStyle(child, pseudo);
+        if (style.content === 'none' || style.content === 'normal'
+            || !style.content || style.display === 'none') continue;
+        const hasBorder = side => Number.parseFloat(
+          style.getPropertyValue(`border-${side}-width`)) > 0
+          && style.getPropertyValue(`border-${side}-style`) === 'solid';
+        if (hasBorder('bottom') && idx < (rows - 1) * cols) downWalls.add(idx);
+        if (hasBorder('top') && idx >= cols) downWalls.add(idx - cols);
+        if (hasBorder('right') && idx % cols < cols - 1) rightWalls.add(idx);
+        if (hasBorder('left') && idx % cols > 0) rightWalls.add(idx - 1);
+      }
+    }
+  }
+  return { downWalls: [...downWalls], rightWalls: [...rightWalls] };
+}
+
 export async function autoSolve() {
   const prioritizedApis = [new ZipDomApiV1(), new ZipDomApiV0()];
   for (let i = 0; i < prioritizedApis.length; ) {
@@ -60,7 +84,10 @@ class ZipDomApi {
         rightWalls.push(idx);
       }
     }
-    return [cellDivs, [rows, cols, numberedCells, downWalls, rightWalls]];
+    const renderedWalls = readRenderedWalls(cellDivs, rows, cols);
+    return [cellDivs, [rows, cols, numberedCells,
+      [...new Set([...downWalls, ...renderedWalls.downWalls])],
+      [...new Set([...rightWalls, ...renderedWalls.rightWalls])]]];
   }
 
   // Dispatches the computed click events one by one. In-progress puzzles are
@@ -71,6 +98,11 @@ class ZipDomApi {
       const cellDiv = cellDivs[loc];
       if (!cellDiv) {
         throw new Error(`No Zip cell found for index ${loc}`);
+      }
+      if (loc === clickSequence[0]
+          && cellDiv.querySelector('[data-testid="filled-cell"]')
+          && gridDiv.querySelectorAll('[data-testid="filled-cell"]').length === 1) {
+        continue;
       }
       await anticipateOneMutation(cellDiv, loc, gridDiv);
     }
@@ -148,7 +180,7 @@ class ZipDomApiV1 extends ZipDomApi {
     );
     const candidateCount = Object.keys(candidates).length;
     if (candidateCount === 0) {
-      orElseThrow(null, 'getDimensionFromGridDiv', 'No appropriate dimension in gridDiv');
+      this.orElseThrow(null, 'getDimensionFromGridDiv', 'No appropriate dimension in gridDiv');
     } else if (candidateCount > 1) {
       console.warn('Multiple dimension candidates found in style; dump:', candidates);
     }
@@ -210,7 +242,8 @@ class ZipDomApiV0 extends ZipDomApi {
     for (const name of names) {
       const inline = gridDiv.style?.getPropertyValue(name)?.trim();
       if (inline) return inline;
-      const computed = getComputedStyle(gridDiv).getPropertyValue(name)?.trim();
+      const computed = gridDiv.ownerDocument.defaultView.getComputedStyle(gridDiv)
+        .getPropertyValue(name)?.trim();
       if (computed) return computed;
     }
     return null;

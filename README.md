@@ -23,6 +23,10 @@ A browser extension for Chrome and Firefox that helps solve LinkedIn's daily puz
 
 For Pinpoint, enter the readable clues currently visible in the game before choosing **Find Pinpoint category**. If the solver needs more information, reveal another clue and try again.
 
+For Wend, open the board and reset any partial game before solving. Required word lengths are read from the current puzzle's word slots, so the tile count can vary each day. Grid dimensions are read from CSS properties, computed grid tracks, or visible tile positions.
+
+Zip falls back to solving the visible board when hydration data is unavailable, including walls rendered with CSS pseudo-elements. Its logged solution lists straight-line endpoints rather than every visited tile.
+
 ## Install from a GitHub release
 
 Download the browser ZIP from the [latest GitHub release](https://github.com/AnandRajput-ASR/LinkedIn-Games-Solver/releases/latest) and extract it.
