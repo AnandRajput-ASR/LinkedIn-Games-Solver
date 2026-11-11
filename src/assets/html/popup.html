@@ -10,6 +10,10 @@
   </style>
 </head>
 <body>
+  <label id="pinpoint-clues-label" for="pinpoint-clues" hidden>Pinpoint clues</label>
+  <textarea id="pinpoint-clues" rows="4" placeholder="Enter visible clues, one per line" aria-describedby="pinpoint-clues-help" hidden></textarea>
+  <small id="pinpoint-clues-help" hidden>Include the clue text currently shown on LinkedIn.</small>
+  <p id="popup-status" role="status" aria-live="polite"></p>
   <button type="button">Solve Puzzle</button>
   <script src="popup.js"></script>
 </body>

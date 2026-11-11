@@ -40,6 +40,10 @@
     {
       "matches": ["*://*.linkedin.com/games/crossclimb*"],
       "js": ["crossclimb.js"]
+    },
+    {
+      "matches": ["*://*.linkedin.com/games/pinpoint*"],
+      "js": ["pinpoint.js"]
     }
   ],
   "web_accessible_resources": [{
