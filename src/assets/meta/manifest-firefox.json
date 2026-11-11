@@ -26,6 +26,10 @@
       "js": ["zip.js"]
     },
     {
+      "matches": ["*://*.linkedin.com/games/tango*"],
+      "js": ["tango.js"]
+    },
+    {
       "matches": ["*://*.linkedin.com/games/patches*"],
       "js": ["patches.js"]
     }
