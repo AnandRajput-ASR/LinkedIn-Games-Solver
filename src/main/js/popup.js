@@ -10,6 +10,7 @@ polyfilledBrowser.tabs.query({ active: true, currentWindow: true })
           || url.includes("linkedin.com/games/mini-sudo")
           || url.includes("linkedin.com/games/minisudoku");
       const isZip = url.includes("linkedin.com/games/zip");
+      const isTango = url.includes("linkedin.com/games/tango");
       const isPatches = url.includes("linkedin.com/games/patches");
 
       if (isQueens) {
@@ -18,6 +19,8 @@ polyfilledBrowser.tabs.query({ active: true, currentWindow: true })
         enableButtonExecuteScript(button, 'Solve Mini-Sudoku', tab, 'sudoku');
       } else if (isZip) {
         enableButtonExecuteScript(button, 'Solve Zip', tab, 'zip');
+      } else if (isTango) {
+        enableButtonExecuteScript(button, 'Solve Tango', tab, 'tango');
       } else if (isPatches) {
         enableButtonExecuteScript(button, 'Solve Patches', tab, 'patches');
       } else {
