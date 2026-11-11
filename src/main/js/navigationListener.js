@@ -4,6 +4,9 @@
 const polyfilledBrowser = (typeof browser !== 'undefined') ? browser : chrome;
 const gameScriptMap = {
   '/games/queens': 'queens.js',
+  '/games/sudoku': 'sudoku.js',
+  '/games/mini-sudoku': 'sudoku.js',
+  '/games/minisudoku': 'sudoku.js',
   '/games/patches': 'patches.js',
 };
 
